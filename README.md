@@ -1,11 +1,7 @@
 # Домашняя работа для третьего учебного семестра (2 год обучения)
 
 ![.NET](https://github.com/scilightener/dotnet-homeworks-2/actions/workflows/dotnet.yml/badge.svg)
-<<<<<<< HEAD
 [![codecov](https://codecov.io/gh/scilightener/dotnet-homeworks-2/branch/hw3/graph/badge.svg?token=0z7WkggdgM)](https://codecov.io/gh/scilightener/dotnet-homeworks-2)
-=======
-[![codecov](https://codecov.io/gh/scilightener/dotnet-homeworks-2/branch/hw1/graph/badge.svg?token=0z7WkggdgM)](https://codecov.io/gh/scilightener/dotnet-homeworks-2)
->>>>>>> f4568872cd0a90b33741e964ef48bbee24522fd5
 
 ## Как устроены Actions
 1. ***build***: *Проверка: собирается ли проект.*
