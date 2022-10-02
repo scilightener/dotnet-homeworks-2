@@ -1,7 +1,7 @@
 using System;
 using System.Threading;
 
-namespace Hw3.Tests;
+namespace Hw3;
 
 public class SingleInitializationSingleton
 {
@@ -21,7 +21,7 @@ public class SingleInitializationSingleton
         Thread.Sleep(delay);
     }
 
-    internal static void Reset()
+    public static void Reset()
     {
         lock (Locker)
         {
