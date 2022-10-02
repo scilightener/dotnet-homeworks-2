@@ -51,10 +51,10 @@ public class SingleInitializationSingletonTests
     
     // dumb test just to cover the inside if-throw line in SingleInitializationSingleton.Initialize()
     [Fact]
-    public void DoubleInitializationAttemptThrowsException_100()
+    public void DoubleInitializationAttemptThrowsException_5000()
     {
-        var tasks = new Task[100];
-        for (int i = 0; i < 100; i++)
+        var tasks = new Task[5000];
+        for (int i = 0; i < 5000; i++)
         {
             tasks[i] = new Task(() =>
             {
