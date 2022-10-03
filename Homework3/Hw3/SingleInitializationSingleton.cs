@@ -23,8 +23,12 @@ public class SingleInitializationSingleton
 
     public static void Reset()
     {
+        if (!_isInitialized)
+            return;
         lock (Locker)
         {
+            if (!_isInitialized)
+                return;
             _instance = new Lazy<SingleInitializationSingleton>(() => new SingleInitializationSingleton());
             _isInitialized = false;
         }

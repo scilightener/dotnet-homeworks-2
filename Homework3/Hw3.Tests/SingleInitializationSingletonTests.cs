@@ -49,7 +49,7 @@ public class SingleInitializationSingletonTests
         });
     }
     
-    // dumb test just to cover the inside if-throw line in SingleInitializationSingleton.Initialize()
+    // dumb test just to cover few lines of code in SingleInitializationSingleton.Initialize()
     [Fact]
     public void DoubleInitializationAttemptThrowsException_5000()
     {
