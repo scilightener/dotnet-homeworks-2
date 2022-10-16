@@ -12,7 +12,8 @@ let epsilon: decimal = 0.001m
 [<InlineData(15, 5, CalculatorOperation.Minus, 10)>]
 [<InlineData(15, 5, CalculatorOperation.Multiply, 75)>]
 [<InlineData(15, 5, CalculatorOperation.Divide, 3)>]
-let ``+, -, *, / work return correct calculation results with ints`` (value1 : int, value2: int, operation, expectedValue : int) =
+let ``+, -, *, / work return correct calculation results with ints``
+    (value1 : int, value2: int, operation, expectedValue : int) =
     //act
     let actual = calculate value1 operation value2
     
