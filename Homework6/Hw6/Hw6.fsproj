@@ -2,9 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <AssemblyName>Hw6.App</AssemblyName>
-        <EnableDefaultContentItems>false</EnableDefaultContentItems>
-        <RootNamespace>Hw6</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -14,6 +11,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Compile Include="Calculator\Arguments.fs" />
+        <Compile Include="Calculator\MaybeBuilder.fs" />
+        <Compile Include="Calculator\Calculator.fs" />
+        <Compile Include="Handlers.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

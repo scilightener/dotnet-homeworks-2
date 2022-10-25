@@ -95,5 +95,51 @@ namespace Hw6Tests
             else
                 Assert.Contains(expectedValueOrError, result);
         }
+        
+        
+
+        [Fact]
+        public async Task TestIncorrectUrn()
+        {
+            var url = "/calculate?v1=22&operation=sub&v2=1";
+
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+            
+            Assert.True(response.StatusCode == HttpStatusCode.BadRequest);
+            Assert.Contains("Missing value for required property value1", result);
+        }
+
+        [Fact]
+        public async Task TestMissingUrn()
+        {
+            var url = "/calculate";
+
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+            
+            Assert.True(response.StatusCode == HttpStatusCode.BadRequest);
+            Assert.Contains("Missing value for required property value1", result);
+        }
+
+        [Fact]
+        public async Task TestIncorrectUrl()
+        {
+            var url = "/calc?v1=22&operation=sub&v2=1";
+            
+            var client = _factory.CreateClient();
+            var response = await client.GetAsync(url);
+            var result = await response.Content.ReadAsStringAsync();
+
+            Assert.True(response.StatusCode == HttpStatusCode.NotFound);
+            Assert.Contains("Not Found", result);
+        }
+
+        public async Task TestWrongArgsLength()
+        {
+            var url = "calculate/value1=1&operation=Plus&value2=1&value3=8";
+        }
     }
 }
