@@ -23,8 +23,6 @@ public class SingleInitializationSingleton
 
     public static void Reset()
     {
-        if (!_isInitialized)
-            return;
         lock (Locker)
         {
             if (!_isInitialized)
@@ -36,8 +34,6 @@ public class SingleInitializationSingleton
 
     public static void Initialize(int delay)
     {
-        if (_isInitialized)
-            throw new InvalidOperationException("Has been already initialized.");
         lock (Locker)
         {
             if (_isInitialized)

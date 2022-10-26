@@ -48,23 +48,4 @@ public class SingleInitializationSingletonTests
             SingleInitializationSingleton.Initialize(3);
         });
     }
-    
-    // dumb test just to cover few lines of code in SingleInitializationSingleton.Initialize()
-    [Fact]
-    public void DoubleInitializationAttemptThrowsException_5000()
-    {
-        var tasks = new Task[5000];
-        for (int i = 0; i < 5000; i++)
-        {
-            tasks[i] = new Task(() =>
-            {
-                SingleInitializationSingleton.Reset();
-                SingleInitializationSingleton.Initialize(2);
-                SingleInitializationSingleton.Initialize(2);
-            });
-            tasks[i].Start();
-        }
-
-        Assert.Throws<AggregateException>(() => Task.WaitAll(tasks));
-    }
 }
