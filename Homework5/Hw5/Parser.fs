@@ -20,26 +20,18 @@ let isArgLengthSupported (args:string[]): bool =
     match args.Length with
     | 3 -> true
     | _ -> false
-    
-[<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
-let inline isOperationSupported operation: bool =
-    match operation with
-    | CalculatorOperation _ -> true
-    | _ -> false
 
 let parseArgs (args: string[]): Result<('a * CalculatorOperation * 'b), Message> =
     if not(isArgLengthSupported args) then Error Message.WrongArgLength
     else 
         match args[0] with
         | Decimal arg1 ->
-            if not(isOperationSupported args[1]) then Error Message.WrongArgFormatOperation
-            else
-                match args[1] with
-                | CalculatorOperation operation ->
-                    match args[2] with
-                    | Decimal arg2 -> Ok (arg1, operation, arg2)
-                    | _ -> Error Message.WrongArgFormat
-                | _ -> Error Message.WrongArgFormatOperation
+            match args[1] with
+            | CalculatorOperation operation ->
+                match args[2] with
+                | Decimal arg2 -> Ok (arg1, operation, arg2)
+                | _ -> Error Message.WrongArgFormat
+            | _ -> Error Message.WrongArgFormatOperation
         | _ -> Error Message.WrongArgFormat
 
 [<System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage>]
