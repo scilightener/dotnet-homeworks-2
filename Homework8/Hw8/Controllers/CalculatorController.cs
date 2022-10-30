@@ -20,7 +20,7 @@ public class CalculatorController : Controller
             ParseStatus.ArgumentError => BadRequest(Messages.InvalidNumberMessage),
             ParseStatus.OperationError => BadRequest(Messages.InvalidOperationMessage),
             ParseStatus.ZeroDivision => Ok(Messages.DivisionByZeroMessage),
-            ParseStatus.Ok => Ok(calculator.Calculate(result.Val1, result.Operation, result.Val2).ToString(CultureInfo.InvariantCulture))
+            ParseStatus.Ok => Ok(calculator.Calculate(result.Val1, result.Operation, result.Val2))
         };
     
     [ExcludeFromCodeCoverage]
