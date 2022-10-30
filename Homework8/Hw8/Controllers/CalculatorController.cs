@@ -7,13 +7,21 @@ namespace Hw8.Controllers;
 
 public class CalculatorController : Controller
 {
-    public ActionResult<double> Calculate([FromServices] ICalculator calculator,
-        string val1,
-        string operation,
-        string val2)
-    {
-        throw new NotImplementedException();
-    }
+    private readonly IParser _parser;
+    public CalculatorController(IParser parser) => _parser = parser;
+
+    public ActionResult<double> Calculate(
+        [FromServices] ICalculator calculator,
+        [FromQuery] string val1,
+        [FromQuery] string operation,
+        [FromQuery] string val2)
+        => _parser.TryParseArguments(val1, operation, val2, out var result) switch
+        {
+            ParseStatus.ArgumentError => BadRequest(Messages.InvalidNumberMessage),
+            ParseStatus.OperationError => BadRequest(Messages.InvalidOperationMessage),
+            ParseStatus.ZeroDivision => Ok(Messages.DivisionByZeroMessage),
+            ParseStatus.Ok => Ok(calculator.Calculate(result.Val1, result.Operation, result.Val2).ToString(CultureInfo.InvariantCulture))
+        };
     
     [ExcludeFromCodeCoverage]
     public IActionResult Index()
