@@ -22,8 +22,8 @@ public static class HtmlHelperExtensions
         foreach (var property in properties)
             page.AppendHtmlLine(
                 "<div>" +
-                "\t" + GetPropertyField(property) +
-                "\t" + GetInputField(model, property) +
+                GetPropertyField(property) +
+                GetInputField(model, property) +
                 "</div>");
         return page;
     }
