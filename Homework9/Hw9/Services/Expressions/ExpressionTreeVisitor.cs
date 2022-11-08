@@ -18,7 +18,7 @@ public class ExpressionTreeVisitor : ExpressionVisitor
             case ExpressionType.Multiply:
                 return Expression.Multiply(Expression.Constant(result[0]), Expression.Constant(result[1]));
             default:
-                if (result[1] < double.Epsilon)
+                if (Math.Abs(result[1]) < double.Epsilon)
                     throw new Exception(DivisionByZero);
                 return Expression.Divide(Expression.Constant(result[0]), Expression.Constant(result[1]));
         }
