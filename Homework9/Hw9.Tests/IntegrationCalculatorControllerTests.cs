@@ -1,5 +1,6 @@
 using System.Globalization;
 using System.Net.Http.Json;
+using System.Runtime.InteropServices;
 using Hw9.Dto;
 using Hw9.ErrorMessages;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -18,6 +19,7 @@ public class IntegrationCalculatorControllerTests : IClassFixture<WebApplication
 	
 	[Theory]
 	[InlineData("10", "10")]
+	[InlineData("5 / 5", "1")]
 	[InlineData("2 + 3", "5")]
 	[InlineData("(10 - 3) * 2", "14")]
 	[InlineData("3 - 4 / 2", "1")]
