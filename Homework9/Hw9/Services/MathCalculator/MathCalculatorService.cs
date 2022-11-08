@@ -11,7 +11,7 @@ public class MathCalculatorService : IMathCalculatorService
         try
         {
             ParserToReversePolishNotation.Validate(expression);
-            var polishString = ParserToReversePolishNotation.Parse(expression);
+            var polishString = ParserToReversePolishNotation.Parse(expression!);
             var expr = ExpressionTree.ConvertToExpression(polishString);
             var result = Expression.Lambda<Func<double>>(
                     await ExpressionTreeVisitor.VisitExpression(expr)).Compile().Invoke();

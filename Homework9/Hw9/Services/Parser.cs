@@ -18,8 +18,7 @@ public static class ParserToReversePolishNotation
         { "/", 2 }
     };
 
-    public static string Parse(string? input) =>
-        ToReversePolishNotation(input ?? "");
+    public static string Parse(string input) => ToReversePolishNotation(input);
     
     // Lasciate ogne speranza, voi ch'entrate
     private static string ToReversePolishNotation(string input)

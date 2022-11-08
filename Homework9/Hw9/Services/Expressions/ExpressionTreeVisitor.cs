@@ -8,23 +8,20 @@ public class ExpressionTreeVisitor : ExpressionVisitor
     protected override Expression VisitBinary(BinaryExpression root)
     {
         var result = CompileTreeAsync(root.Left, root.Right).Result;
-        return root.NodeType switch
+
+        switch (root.NodeType)
         {
-            ExpressionType.Add => Expression.Add(
-                Expression.Constant(result[0]), 
-                Expression.Constant(result[1])),
-            ExpressionType.Subtract => Expression.Subtract(
-                Expression.Constant(result[0]),
-                Expression.Constant(result[1])),
-            ExpressionType.Multiply => Expression.Multiply(
-                Expression.Constant(result[0]),
-                Expression.Constant(result[1])),
-            _ => result[1] > double.Epsilon
-                ? Expression.Divide(
-                Expression.Constant(result[0]), 
-                Expression.Constant(result[1]))
-                : throw new Exception(DivisionByZero)
-        };
+            case ExpressionType.Add:
+                return Expression.Add(Expression.Constant(result[0]), Expression.Constant(result[1]));
+            case ExpressionType.Subtract:
+                return Expression.Subtract(Expression.Constant(result[0]), Expression.Constant(result[1]));
+            case ExpressionType.Multiply:
+                return Expression.Multiply(Expression.Constant(result[0]), Expression.Constant(result[1]));
+            default:
+                if (result[1] < double.Epsilon)
+                    throw new Exception(DivisionByZero);
+                return Expression.Divide(Expression.Constant(result[0]), Expression.Constant(result[1]));
+        }
     }
 
     public static Task<Expression> VisitExpression(Expression expr) =>
