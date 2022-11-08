@@ -10,10 +10,11 @@ public class MathCalculatorService : IMathCalculatorService
     {
         try
         {
-            var polishString = ParserToPolishNotation.Parse(expression);
+            ParserToReversePolishNotation.Validate(expression);
+            var polishString = ParserToReversePolishNotation.Parse(expression);
             var expr = ExpressionTree.ConvertToExpression(polishString);
-            var result = Expression.Lambda<Func<double>>(await ExpressionTreeVisitor.VisitExpression(expr)).Compile()
-                .Invoke();
+            var result = Expression.Lambda<Func<double>>(
+                    await ExpressionTreeVisitor.VisitExpression(expr)).Compile().Invoke();
             return new CalculationMathExpressionResultDto(result);
         }
         catch (Exception ex)

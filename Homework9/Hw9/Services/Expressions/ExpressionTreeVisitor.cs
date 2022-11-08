@@ -19,13 +19,16 @@ public class ExpressionTreeVisitor : ExpressionVisitor
             ExpressionType.Multiply => Expression.Multiply(
                 Expression.Constant(result[0]),
                 Expression.Constant(result[1])),
-            _ => result[1] > double.Epsilon ? Expression.Divide(
+            _ => result[1] > double.Epsilon
+                ? Expression.Divide(
                 Expression.Constant(result[0]), 
-                Expression.Constant(result[1])) : throw new Exception(DivisionByZero)
+                Expression.Constant(result[1]))
+                : throw new Exception(DivisionByZero)
         };
     }
 
-    public static Task<Expression> VisitExpression(Expression expr) => Task.Run(() => new ExpressionTreeVisitor().Visit(expr));
+    public static Task<Expression> VisitExpression(Expression expr) =>
+        Task.Run(() => new ExpressionTreeVisitor().Visit(expr));
 
     private static async Task<double[]> CompileTreeAsync(Expression left, Expression right)
     {
