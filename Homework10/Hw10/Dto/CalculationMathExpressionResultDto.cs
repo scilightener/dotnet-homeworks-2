@@ -17,9 +17,7 @@ public class CalculationMathExpressionResultDto
         IsSuccess = true;
         Result = result;
     }
-
-    public CalculationMathExpressionResultDto()
-    {
-        
-    }
+    
+    // without it everything breaks... i don't know why.......
+    public CalculationMathExpressionResultDto() { }
 }

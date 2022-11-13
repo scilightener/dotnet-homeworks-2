@@ -7,10 +7,15 @@ namespace Hw10.DbModels;
 public class SolvingExpression
 {
 	public int SolvingExpressionId { get; set; }
-		
-	[Required] 
-	public string Expression { get; set; } = null!;
+
+	[Required] public string Expression { get; set; }
 
 	[Required] 
 	public double Result { get; set; }
+
+	public SolvingExpression(string expression, double result)
+	{
+		Expression = expression;
+		Result = result;
+	}
 }
