@@ -28,6 +28,6 @@ public class ExpressionTreeVisitor
 
     public static async Task<double> VisitExpression(Expression expr)
     {
-        return await VisitNode((dynamic)expr);
+        return await Task.FromResult(await VisitNode((dynamic)expr));
     }
 }
