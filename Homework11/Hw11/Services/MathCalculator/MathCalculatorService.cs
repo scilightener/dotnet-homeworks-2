@@ -1,9 +1,15 @@
+using System.Linq.Expressions;
+using Hw11.Expressions;
+
 namespace Hw11.Services.MathCalculator;
 
 public class MathCalculatorService : IMathCalculatorService
 {
-    public async Task<double> CalculateMathExpressionAsync(string? expression)
+    public Task<double> CalculateMathExpressionAsync(string? expression)
     {
-        throw new NotImplementedException();
+        ParserToReversePolishNotation.Validate(expression);
+        var polishString = ParserToReversePolishNotation.Parse(expression!);
+        var expr = ExpressionTree.ConvertToExpression(polishString);
+        return ExpressionTreeVisitor.VisitExpression(expr);
     }
 }
