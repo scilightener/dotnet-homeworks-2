@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using static Hw11.ErrorMessages.MathErrorMessager;
 
@@ -11,7 +12,7 @@ public class ExpressionTreeVisitor
         var left = VisitExpression(root.Left);
         var right = VisitExpression(root.Right);
         Task.WaitAll(left, right);
-        
+
         return root.NodeType switch
         {
             ExpressionType.Add => left.Result + right.Result,
@@ -26,8 +27,9 @@ public class ExpressionTreeVisitor
         return await Task.FromResult((double) node.Value!);
     }
 
+    [ExcludeFromCodeCoverage]
     public static async Task<double> VisitExpression(Expression expr)
     {
-        return await Task.FromResult(await VisitNode((dynamic)expr));
+        return await VisitNode((dynamic)expr);
     }
 }

@@ -10,6 +10,6 @@ public class MathCalculatorService : IMathCalculatorService
         ParserToReversePolishNotation.Validate(expression);
         var polishString = ParserToReversePolishNotation.Parse(expression!);
         var expr = ExpressionTree.ConvertToExpression(polishString);
-        return ExpressionTreeVisitor.VisitExpression(expr);
+        return ExpressionTreeVisitor.VisitExpression((dynamic)expr);
     }
 }
