@@ -4,7 +4,7 @@ namespace Hw12;
 
 [MaxColumn]
 [MinColumn]
-public class WebApplicationWorkingTimeTests
+public class WebApplicationWorkingTimeTests : IDisposable
 {
 	private HttpClient _cSharpClient = null!;
 	private HttpClient _fSharpClient = null!;
@@ -72,5 +72,10 @@ public class WebApplicationWorkingTimeTests
 	private async Task SendRequestFSharp(string v1, string operation, string v2)
 	{
 		await _fSharpClient.GetAsync($"/calculate?value1={v1}&operation={operation}&value2={v2}");
+	}
+
+	public void Dispose()
+	{
+		GC.SuppressFinalize(this);
 	}
 }
