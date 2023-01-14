@@ -17,6 +17,6 @@ public class MonsterController
         var total = _db.Monsters.Count();
         var rnd = new Random();
         var toSkip = rnd.Next(total);
-        return new JsonResult(_db.Monsters.Skip(toSkip).First());
+        return new JsonResult(_db.Monsters.ElementAt(toSkip));
     }
 }

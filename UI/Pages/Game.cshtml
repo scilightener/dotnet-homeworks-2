@@ -2,6 +2,7 @@
 @using System.ComponentModel
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Models
+@using Models.Dtos
 @model UI.Pages.Game
 
 <div class="card">
@@ -12,18 +13,46 @@
             @Html.Label(property.GetCustomAttributes(true)
                 .Select(a => (a as DisplayNameAttribute)?.DisplayName)
                 .FirstOrDefault(name => name is not null) ?? property.Name)
-            @Html.Editor(property.Name,  new { htmlAttributes = new{ @class="form-control"} })
-            @Html.ValidationMessage(property.Name, new { @class="text text-danger" })
+            @Html.Editor(property.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessage(property.Name, new { @class = "text text-danger" })
             <br/>
         }
         <input type="submit" class="btn btn-primary" value="Fight!"/>
     </form>
 </div>
 
-<div>
-    @if (Model.Result is not null)
-    {
-        @Model.Result.Winner
-        @Model.Result.Logs
-    }
-</div>
+@if (Model.Monster is not null)
+{
+    <div>monster hitpoints @Model.Monster.HitPoints</div>
+    <div> monster ac @Model.Monster.ArmorClass</div>
+    <div>monster damage mod @Model.Monster.DamageModifier</div>
+}
+
+
+@if (Model.Result is not null)
+{
+        @foreach (var action in Model.Result.Logs)
+        {
+            <h2>@action.CharacterName</h2>
+            @for (int i = 0; i < action.DiceRoll.Length; i++)
+            {
+                <div> d20 + attack modifier: @action.DiceRoll[i] + @action.AttackModifier</div> 
+                <div> @action.HitType[i] </div>
+                <div>Damage: @action.Damage[i] for @action.EnemyName</div>
+                <div>Enemy HP: @action.EnemyName (@action.EnemyHp[i])</div>  
+            }                                              
+        }
+        
+        <div>
+            Победил:
+            @if (Model.Result.Winner is Character.Player)
+            {
+                <div> @Model.Player.Name </div> 
+            }
+            else
+            {
+                <div> @Model.Monster.Name </div> 
+            }
+        </div>
+}
+

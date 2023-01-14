@@ -1,6 +1,6 @@
 namespace Models.Dtos;
 
-public enum Winner
+public enum Character
 {
     Player,
     Monster
