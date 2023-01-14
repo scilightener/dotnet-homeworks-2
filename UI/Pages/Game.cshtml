@@ -20,3 +20,10 @@
     </form>
 </div>
 
+<div>
+    @if (Model.Result is not null)
+    {
+        @Model.Result.Winner
+        @Model.Result.Logs
+    }
+</div>
